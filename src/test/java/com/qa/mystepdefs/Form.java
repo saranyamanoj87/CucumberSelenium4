@@ -1,26 +1,22 @@
 package com.qa.mystepdefs;
 
-import MainPage.Checkbox;
-
+import MainPage.FormObject;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-
-
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.Scenario;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 
 
-public class CheckboxSelection {
-    private WebDriver driver;
-    private Checkbox checkBox;
-
+public class Form {
+    static WebDriver driver;
+    static FormObject object;
     @Before
     public void setup() {
         driver = new ChromeDriver();
@@ -30,7 +26,7 @@ public class CheckboxSelection {
     public void tearDown() {
         if (driver != null) {
             driver.close();
-           // driver.quit();
+            // driver.quit();
         }
     }
     @After
@@ -47,24 +43,28 @@ public class CheckboxSelection {
             System.out.println("Screenshot taken and attached to the Cucumber report");
         }
     }
+    @Given("I opened website")
+    public void iOpenedWebsite() {
 
-    @Given("I opened primereact website")
-    public void iOpenedPrimereactWebsite() {
-        driver.get("https://www.primefaces.org/primereact-v5/#/datatable/selection");
-        driver.manage().window().maximize();
-        checkBox = new Checkbox(driver);
-    }
-    @When("I click on the checkbox against {string} checkbox")
-    public void iClickOnTheCheckboxAgainstCheckbox(String arg0)  {
-        checkBox.checkboxColumn(arg0);
-        Assert.assertEquals(checkBox.highlightCheckbox().isDisplayed(),true);
-    }
-    @Then("I should see checkbox {string} get selected successfully")
-    public void iShouldSeeCheckboxGetSelectedSuccessfully(String arg0) {
-        Assert.assertEquals(checkBox.selectedCheckboxText(),arg0);
+        driver.get("https://demoqa.com/automation-practice-form");
+       driver.manage().window().maximize();
     }
 
+    @Then("I should see popup window saying Thanks")
+    public void iShouldSeePopupWindowSayingThanks() {
 
+    }
 
+    @When("I fill the form with correct details")
+    public void iFillTheFormWithCorrectDetails() {
+         object = new FormObject(driver);
+         object.inputFirstName("FirstName");
+         object.inputLastName("Lastname");
+         object.email("qa@mailinator.com");
+         object.radioButton();
+         object.userName("8907654321");
+         object.subject("hi");
+         object.checkBox();
+
+    }
 }
-
