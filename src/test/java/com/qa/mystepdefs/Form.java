@@ -52,7 +52,7 @@ public class Form {
 
     @Then("I should see popup window saying Thanks")
     public void iShouldSeePopupWindowSayingThanks() {
-
+    System.out.println("Test");
     }
 
     @When("I fill the form with correct details")
