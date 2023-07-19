@@ -19,7 +19,7 @@ public class Form {
     static FormObject object;
     @Before
     public void setup() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
     }
 
     @After
